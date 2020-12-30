@@ -243,6 +243,12 @@ var AnimationClip = cc.Class({
             else if (firstValue instanceof cc.Vec3) {
                 curve._lerp = DynamicAnimCurve.prototype._lerpVector3;
             }
+            else if (typeof firstValue == 'string') {
+                curve._lerp = DynamicAnimCurve.prototype._lerpString;
+            }
+            else if (typeof firstValue == 'boolean') {
+                curve._lerp = DynamicAnimCurve.prototype._lerpBoolean;
+            }
             else if (firstValue.lerp) {
                 curve._lerp = DynamicAnimCurve.prototype._lerpObject;
             }

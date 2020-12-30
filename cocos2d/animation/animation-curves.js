@@ -182,6 +182,18 @@ var DynamicAnimCurve = cc.Class({
         };
     })(),
 
+    _lerpString : (function(){
+        return function (from, to, t) {
+            return from
+        };
+    })(),
+
+    _lerpBoolean : (function(){
+        return function (from, to, t) {
+            return from
+        };
+    })(),
+
     sample (time, ratio, state) {
         let values = this.values;
         let ratios = this.ratios;

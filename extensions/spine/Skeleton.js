@@ -187,7 +187,37 @@ sp.Skeleton = cc.Class({
             },
             visible: false
         },
+        /**
+         * anim for keyframe
+         */
+        animPlay : {
+            get(){
+                return this._animationName 
+            },
+            set(value){
+                if(this._animationName != value || this._prevLoop != this.loop){
+                    this._animationName = value
+                    this.setAnimation(0, value, this.loop);
+                    this._prevLoop = this.loop
+                }
+            },
+            readonly: true,
+            visible: true
+        },
 
+        animLoop : {
+            get(){
+                return this.loop 
+            },
+            set(value){
+                if(this.loop != value){
+                    this.setAnimation(0, this._animationName, value);
+                    this.loop = value
+                }
+            },
+            readonly: true,
+            visible: true
+        },
         /**
          * @property {Number} _defaultSkinIndex
          */
@@ -654,7 +684,11 @@ sp.Skeleton = cc.Class({
     },
 
     update (dt) {
-        if (CC_EDITOR) return;
+        // if (CC_EDITOR) return;
+        if (CC_EDITOR) {
+            // cc.engine._animatingInEditMode = 1;
+            cc.engine.animatingInEditMode = 1;
+        }
         if (this.paused) return;
 
         dt *= this.timeScale * sp.timeScale;
